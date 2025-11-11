@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bäckerei XY – Mitarbeitende</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="hintfab"
+     class="hintfab"
+     data-h1="Kann man irgendwie in das Intranet kommen? Wer könnte einen Hinweis auf sein Passwort gegeben haben?"
+     data-h2="Jemand hat kürzlich ein Kind bekommen. An welchem Datum wurde es wohl geboren? Und könnte sich der Vater mehr darüber freuen als die Mutter?"
+     data-solution="Markus Wagner scheint das Passwort 070125 zu haben.">
+  <button class="hintfab-btn" type="button" aria-expanded="false" aria-controls="hintfab-panel" aria-label="Hinweise öffnen">
+    
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M9 21h6a1 1 0 0 0 1-1v-1H8v1a1 1 0 0 0 1 1m3-19a7 7 0 0 0-4 12.9V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.1A7 7 0 0 0 12 2" />
+    </svg>
+  </button>
+
+  <div class="hintfab-panel" id="hintfab-panel" role="dialog" aria-modal="false" aria-labelledby="hintfab-title">
+    <div class="hintfab-hd">
+      <strong id="hintfab-title">Hinweise</strong>
+      <button class="hintfab-close" type="button" aria-label="Schließen">×</button>
+    </div>
+
+    <div class="hintfab-actions" role="group" aria-label="Hinweisstufe wählen">
+      <button class="hintfab-chip" type="button" data-show="h1">Hinweis 1</button>
+      <button class="hintfab-chip" type="button" data-show="h2">Hinweis 2</button>
+      <button class="hintfab-chip primary" type="button" data-show="solution">Lösung anzeigen</button>
+    </div>
+
+    <div class="hintfab-body" id="hintfab-content">
+      <em>Wähle eine Option, um einen Hinweis zu sehen.</em>
+    </div>
+  </div>
+</div>
+
+<style>
+  .input-wrap { position: relative; }
+.input-wrap .input { width: 100%; padding-right: 44px; }
+
+.pw-toggle {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  width: 32px; height: 32px; border-radius: 8px;
+  border: 1px solid #2a394b; background: #0f141a; color: #e8edf1;
+  display: grid; place-items: center; cursor: pointer;
+}
+.pw-toggle:focus-visible { outline: 3px solid #72a0ff; outline-offset: 2px; }
+
+  
+  .hintfab { position: fixed; right: 20px; bottom: 20px; z-index: 9999; font-family: inherit; }
+  .hintfab-btn {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--accent, #ffd166); color: #0b0f14;
+    border: 1px solid rgba(0,0,0,.2); box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    display: grid; place-items: center; cursor: pointer;
+    transition: transform .08s ease;
+  }
+  .hintfab-btn:hover { transform: translateY(-1px); }
+  .hintfab-panel {
+    position: absolute; right: 0; bottom: 72px; width: min(320px, 88vw);
+    background: linear-gradient(180deg, rgba(20,26,33,.95), rgba(14,18,23,.95));
+    color: var(--text, #e8edf1);
+    border: 1px solid #203043; border-radius: 14px; box-shadow: 0 16px 48px rgba(0,0,0,.45);
+    padding: 10px; opacity: 0; transform: translateY(6px) scale(.98);
+    pointer-events: none; transition: opacity .15s ease, transform .15s ease;
+  }
+  .hintfab.open .hintfab-panel { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .hintfab-hd { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 2px 8px; }
+  .hintfab-close {
+    border: 1px solid #2a394b; background: #0f141a; color: #cbd2d8;
+    width: 28px; height: 28px; border-radius: 8px; cursor: pointer;
+  }
+  .hintfab-actions { display: flex; flex-wrap: wrap; gap: 8px; padding: 6px 2px 8px; }
+  .hintfab-chip {
+    border: 1px solid #2a394b; background: #0f141a; color: #e8edf1;
+    border-radius: 999px; padding: 6px 10px; font-size: 13px; cursor: pointer;
+  }
+  .hintfab-chip.primary { background: linear-gradient(180deg, #2a394b, #1a2430); }
+  .hintfab-body {
+    background: #0b1217; border: 1px dashed #2b3847; border-radius: 10px;
+    padding: 10px; font-size: 14px;
+  }
+</style>
+
+<script>
+  (function(){
+    const fab = document.getElementById('hintfab');
+    if (!fab) return;
+    const btn = fab.querySelector('.hintfab-btn');
+    const panel = fab.querySelector('.hintfab-panel');
+    const closeBtn = fab.querySelector('.hintfab-close');
+    const content = fab.querySelector('#hintfab-content');
+
+    const texts = {
+      h1: fab.dataset.h1 || 'Hinweis 1 (Platzhalter)',
+      h2: fab.dataset.h2 || 'Hinweis 2 (Platzhalter)',
+      solution: fab.dataset.solution || 'Lösung (Platzhalter)'
+    };
+
+    function openPanel(){
+      fab.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    
+      setTimeout(() => panel.querySelector('[data-show]')?.focus(), 0);
+      
+      document.addEventListener('click', onDocClick, { capture: true });
+      document.addEventListener('keydown', onKey);
+    }
+    function closePanel(){
+      fab.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      document.removeEventListener('click', onDocClick, { capture: true });
+      document.removeEventListener('keydown', onKey);
+      btn.focus();
+    }
+    function onDocClick(e){
+      if (!fab.contains(e.target)) { closePanel(); }
+    }
+    function onKey(e){
+      if (e.key === 'Escape') closePanel();
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      fab.classList.contains('open') ? closePanel() : openPanel();
+    });
+    closeBtn.addEventListener('click', closePanel);
+
+    panel.querySelectorAll('[data-show]').forEach(el => {
+      el.addEventListener('click', () => {
+        const key = el.getAttribute('data-show');
+        content.innerHTML = `<strong>${el.textContent}:</strong> ${texts[key]}`;
+      });
+    });
+  })();
+</script>
+
+
+
+
+
+<header class="header">
+  <div class="container header__bar">
+    <a class="brand" href="index.html" aria-label="Startseite">
+      <span class="brand__logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12c0-4.418 3.582-8 8-8 3.314 0 6 2.686 6 6v6a2 2 0 0 1-2 2H8a4 4 0 0 1-4-4v-2Z" fill="white"/><path d="M9 9c0-1 .8-1.8 1.8-1.8M12 10c0-1 .8-1.8 1.8-1.8M15 11c0-1 .8-1.8 1.8-1.8" stroke="#8B5E34" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand__title">Haus der Kruste</span>
+    </a>
+    <button class="menu-toggle">Menü</button>
+    <nav class="menu-panel" aria-label="Hauptmenü">
+      <a href="about.html">Über uns</a>
+      <a href="services.html">Leistungen</a>
+      <a href="team.html">Mitarbeitende</a>
+      <a href="contact.html">Kontakt</a>
+      <a href="impressum.html">Impressum</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container section">
+  <h1>Mitarbeitende</h1>
+  <p class="lead">Lernen Sie unser Team kennen – kompetent, herzlich und mit Leidenschaft fürs Handwerk.</p>
+
+  <div class="team-grid mt16">
+    <a class="team-card" href="staff/Annemarie-Wagner.html">
+      <img src="staff/annemariewagner.tif" alt="Annemarie Wagner">
+      <div class="team-card__body">
+        <div class="team-card__name">Annemarie Wagner</div>
+        <div class="team-card__role">Konditormeisterin</div>
+      </div>
+    </a>
+    <a class="team-card" href="staff/markus-wagner.html">
+      <img src="staff/markuswagner.tif" alt="Markus Wagner">
+      <div class="team-card__body">
+        <div class="team-card__name">Markus Wagner</div>
+        <div class="team-card__role">Bäckermeister</div>
+      </div>
+    </a>
+    <a class="team-card" href="staff/fatima-ozdemir.html">
+      <img src="staff/fatimaozdemir.jpg" alt="Fatima Özdemir">
+      <div class="team-card__body">
+        <div class="team-card__name">Fatima Özdemir</div>
+        <div class="team-card__role">Service</div>
+      </div>
+    </a>
+    <a class="team-card" href="staff/martin-weiss.html">
+      <img src="staff/martinweiss.jpg" alt="Martin Weiss">
+      <div class="team-card__body">
+        <div class="team-card__name">Martin Weiss</div>
+        <div class="team-card__role">Auszubildender Buchhaltung</div>
+      </div>
+    </a>
+    <a class="team-card" href="staff/marie-beck.html">
+      <img src="staff/mariebeck.jpg" alt="Marie Beck">
+      <div class="team-card__body">
+        <div class="team-card__name">Marie Beck</div>
+        <div class="team-card__role">Werkstudentin Website Management</div>
+      </div>
+    </a>
+    <a class="team-card" href="staff/marcel-walde.html">
+      <img src="staff/marcelwalde.tif" alt="Marcel Walde">
+      <div class="team-card__body">
+        <div class="team-card__name">Marcel Walde</div>
+        <div class="team-card__role">Auszubildender Konditorei</div>
+      </div>
+    </a>
+  </div>
+
+<section class="section" aria-label="Mitarbeitenden-Login">
+  <div class="card" style="padding:16px">
+    <h2 class="m0">Intranet-Login</h2>
+    <p class="small mt8" style="color:var(--clr-muted)">Du arbeitest bei uns im Team? Dann melde hier hier für Dienstpläne und weiteres an.</p>
+
+    <form id="intranet-login" class="form mt16" action="#" method="post" autocomplete="off" novalidate>
+      <div class="form__row">
+        <div>
+          <label for="loginName">Anmeldename</label>
+          <input class="input" type="text" id="loginName" name="loginName"
+                 placeholder="z. B. Maxi Musterfrau" required>
+        </div>
+     <div>
+  <label for="loginPassword">Passwort</label>
+
+  <div class="input-wrap">
+    <input class="input" type="password" id="loginPassword" name="loginPassword"
+           placeholder="z. B. 090225" required>
+
+    <button type="button"
+            class="pw-toggle"
+            aria-label="Passwort anzeigen"
+            aria-pressed="false"
+            title="Passwort anzeigen"
+            data-target="loginPassword">
+      <svg class="icon-eye" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5m0 12A4.5 4.5 0 1 1 16.5 12 4.5 4.5 0 0 1 12 16.5m0-7A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5"/>
+      </svg>
+      <svg class="icon-eye-off" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="display:none">
+        <path fill="currentColor" d="M2 4.27 3.28 3 21 20.72 19.73 22l-3.12-3.12A10.91 10.91 0 0 1 12 19.5C7 19.5 2.73 16.39 1 12a12.1 12.1 0 0 1 5.06-6.28L2 4.27M12 6.5a5.5 5.5 0 0 1 5.5 5.5c0 1-.27 1.93-.74 2.73L9.77 7.73A5.44 5.44 0 0 1 12 6.5Z"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+        
+      </div>
+      <div>
+        <button class="btn" type="submit">Anmelden</button>
+        <span id="loginMsg" class="small mt8" style="color:#9B1C1C; margin-left:8px;"></span>
+      </div>
+       
+    </form>
+  </div>
+  
+
+
+<script>
+(function(){
+  const form = document.getElementById('intranet-login');
+  if(!form) return;
+
+  
+  const CREDS = [
+    { name: 'markus wagner', passes: ['070125'], url: 'intranet/index.html' },
+    { name: 'martin weiss',  passes: ['mar524iss'],                 url: 'intranet-martin/index.html' },
+    { name: 'fatima özdemir', passes: ['Fatima1987'], url: 'intranet-fatima/index.html' },
+    { name: 'marie beck', passes: ['AbbyBeck2002'], url: 'intranet-marie/index.html' },
+    { name: 'annemarie wagner', passes: ['AnemHABGM'], url: 'intranet-annemarie/index.html' },
+    { name: 'marcel walde', passes: ['mirko2002'], url: 'intranet-marcel/index.html' },
+      { name: 'Markus Wagner', passes: ['070125'], url: 'intranet/index.html' },
+    { name: 'Martin Weiss',  passes: ['mar524iss'],                 url: 'intranet-martin/index.html' },
+    { name: 'Fatima Özdemir', passes: ['Fatima1987'], url: 'intranet-fatima/index.html' },
+    { name: 'Marie Beck', passes: ['AbbyBeck2002'], url: 'intranet-marie/index.html' },
+    { name: 'Annemarie Wagner', passes: ['AnemHABGM'], url: 'intranet-annemarie/index.html' },
+    { name: 'Marcel Walde', passes: ['mirko2002'], url: 'intranet-marcel/index.html' },
+    
+  ];
+
+  const norm   = s => (s||'').toLowerCase().trim().replace(/\s+/g,' ');
+  const nameEl = form.querySelector('#loginName');
+  const passEl = form.querySelector('#loginPassword');
+  const msgEl  = document.getElementById('loginMsg');
+
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const name = norm(nameEl.value);
+    const pass = (passEl.value||'').trim();
+    const rec  = CREDS.find(c => c.name === name);
+
+    if(rec && rec.passes.includes(pass)){
+      window.location.href = rec.url;
+    }else{
+      if(msgEl) msgEl.textContent = 'Anmeldename oder Passwort falsch.';
+    }
+  });
+
+
+
+  document.querySelectorAll('.pw-toggle').forEach(btn => {
+    const targetId = btn.dataset.target;
+    const input = document.getElementById(targetId);
+    if (!input) return;
+
+    const eye     = btn.querySelector('.icon-eye');
+    const eyeOff  = btn.querySelector('.icon-eye-off');
+
+    btn.addEventListener('click', () => {
+      const visible = input.type === 'text';
+      input.type = visible ? 'password' : 'text';
+
+ 
+      btn.setAttribute('aria-pressed', String(!visible));
+      btn.title = visible ? 'Passwort anzeigen' : 'Passwort verbergen';
+
+ 
+      if (eye && eyeOff) {
+        eye.style.display = visible ? '' : 'none';
+        eyeOff.style.display = visible ? 'none' : '';
+      }
+
+      input.focus({ preventScroll: true });
+
+      const val = input.value; input.value = ''; input.value = val;
+    });
+  });
+
+
+
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner small">
+    <span>© <span id="year"></span> Haus der Kruste</span>
+    <span>
+      <a href="impressum.html">Impressum</a> ·
+      <a href="contact.html">Kontakt</a>
+    </span>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

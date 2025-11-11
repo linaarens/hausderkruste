@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bäckerei XY – Impressum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="hintfab"
+     class="hintfab"
+     data-h1="Auf dieser Seite hat jemand eine persönliche Botschaft hinterlassen."
+     data-h2="Sie ist am Ende der Seite und zeigt ein Bild."
+     data-solution="Hat AbbyBeck etwas mit Maries Passwort zu tun? Da scheint aber noch ein Zusatz zu fehlen.">
+  <button class="hintfab-btn" type="button" aria-expanded="false" aria-controls="hintfab-panel" aria-label="Hinweise öffnen">
+   
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M9 21h6a1 1 0 0 0 1-1v-1H8v1a1 1 0 0 0 1 1m3-19a7 7 0 0 0-4 12.9V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.1A7 7 0 0 0 12 2" />
+    </svg>
+  </button>
+
+  <div class="hintfab-panel" id="hintfab-panel" role="dialog" aria-modal="false" aria-labelledby="hintfab-title">
+    <div class="hintfab-hd">
+      <strong id="hintfab-title">Hinweise</strong>
+      <button class="hintfab-close" type="button" aria-label="Schließen">×</button>
+    </div>
+
+    <div class="hintfab-actions" role="group" aria-label="Hinweisstufe wählen">
+      <button class="hintfab-chip" type="button" data-show="h1">Hinweis 1</button>
+      <button class="hintfab-chip" type="button" data-show="h2">Hinweis 2</button>
+      <button class="hintfab-chip primary" type="button" data-show="solution">Lösung anzeigen</button>
+    </div>
+
+    <div class="hintfab-body" id="hintfab-content">
+      <em>Wähle eine Option, um einen Hinweis zu sehen.</em>
+    </div>
+  </div>
+</div>
+
+<style>
+  
+  .hintfab { position: fixed; right: 20px; bottom: 20px; z-index: 9999; font-family: inherit; }
+  .hintfab-btn {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--accent, #ffd166); color: #0b0f14;
+    border: 1px solid rgba(0,0,0,.2); box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    display: grid; place-items: center; cursor: pointer;
+    transition: transform .08s ease;
+  }
+  .hintfab-btn:hover { transform: translateY(-1px); }
+  .hintfab-panel {
+    position: absolute; right: 0; bottom: 72px; width: min(320px, 88vw);
+    background: linear-gradient(180deg, rgba(20,26,33,.95), rgba(14,18,23,.95));
+    color: var(--text, #e8edf1);
+    border: 1px solid #203043; border-radius: 14px; box-shadow: 0 16px 48px rgba(0,0,0,.45);
+    padding: 10px; opacity: 0; transform: translateY(6px) scale(.98);
+    pointer-events: none; transition: opacity .15s ease, transform .15s ease;
+  }
+  .hintfab.open .hintfab-panel { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .hintfab-hd { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 2px 8px; }
+  .hintfab-close {
+    border: 1px solid #2a394b; background: #0f141a; color: #cbd2d8;
+    width: 28px; height: 28px; border-radius: 8px; cursor: pointer;
+  }
+  .hintfab-actions { display: flex; flex-wrap: wrap; gap: 8px; padding: 6px 2px 8px; }
+  .hintfab-chip {
+    border: 1px solid #2a394b; background: #0f141a; color: #e8edf1;
+    border-radius: 999px; padding: 6px 10px; font-size: 13px; cursor: pointer;
+  }
+  .hintfab-chip.primary { background: linear-gradient(180deg, #2a394b, #1a2430); }
+  .hintfab-body {
+    background: #0b1217; border: 1px dashed #2b3847; border-radius: 10px;
+    padding: 10px; font-size: 14px;
+  }
+</style>
+
+<script>
+  (function(){
+    const fab = document.getElementById('hintfab');
+    if (!fab) return;
+    const btn = fab.querySelector('.hintfab-btn');
+    const panel = fab.querySelector('.hintfab-panel');
+    const closeBtn = fab.querySelector('.hintfab-close');
+    const content = fab.querySelector('#hintfab-content');
+
+    const texts = {
+      h1: fab.dataset.h1 || 'Hinweis 1 (Platzhalter)',
+      h2: fab.dataset.h2 || 'Hinweis 2 (Platzhalter)',
+      solution: fab.dataset.solution || 'Lösung (Platzhalter)'
+    };
+
+    function openPanel(){
+      fab.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+      
+      setTimeout(() => panel.querySelector('[data-show]')?.focus(), 0);
+      
+      document.addEventListener('click', onDocClick, { capture: true });
+      document.addEventListener('keydown', onKey);
+    }
+    function closePanel(){
+      fab.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      document.removeEventListener('click', onDocClick, { capture: true });
+      document.removeEventListener('keydown', onKey);
+      btn.focus();
+    }
+    function onDocClick(e){
+      if (!fab.contains(e.target)) { closePanel(); }
+    }
+    function onKey(e){
+      if (e.key === 'Escape') closePanel();
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      fab.classList.contains('open') ? closePanel() : openPanel();
+    });
+    closeBtn.addEventListener('click', closePanel);
+
+    panel.querySelectorAll('[data-show]').forEach(el => {
+      el.addEventListener('click', () => {
+        const key = el.getAttribute('data-show');
+        content.innerHTML = `<strong>${el.textContent}:</strong> ${texts[key]}`;
+      });
+    });
+  })();
+</script>
+
+
+
+
+<header class="header">
+  <div class="container header__bar">
+    <a class="brand" href="index.html" aria-label="Startseite">
+      <span class="brand__logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12c0-4.418 3.582-8 8-8 3.314 0 6 2.686 6 6v6a2 2 0 0 1-2 2H8a4 4 0 0 1-4-4v-2Z" fill="white"/><path d="M9 9c0-1 .8-1.8 1.8-1.8M12 10c0-1 .8-1.8 1.8-1.8M15 11c0-1 .8-1.8 1.8-1.8" stroke="#8B5E34" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand__title">Haus der Kruste</span>
+    </a>
+    <button class="menu-toggle">Menü</button>
+    <nav class="menu-panel" aria-label="Hauptmenü">
+      <a href="about.html">Über uns</a>
+      <a href="services.html">Leistungen</a>
+      <a href="team.html">Mitarbeitende</a>
+      <a href="contact.html">Kontakt</a>
+      <a href="impressum.html">Impressum</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container section left">
+  <h1 class="m0">Impressum</h1>
+  <p class="lead">Angaben gemäß § 5 TMG</p>
+
+  <address class="mt16" style="font-style:normal">
+    <strong>Haus der Kruste</strong><br>
+    Backstraße 10<br>
+    98376 Hindenburg<br>
+    Deutschland
+  </address>
+
+  <p class="mt8">
+    E-Mail: <a href="mailto:hallo@baeckerei-xy.de">info@hausderkruste.de</a><br>
+    Telefon: <a href="tel:+491234567890">+49 123 4567890</a>
+  </p>
+
+  <p class="small mt24">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV: Haus der Kruste, Backstraße 10, 98376 Hindenburg.</p>
+  <p class="mtviel">Auch noch erwähnenswert: mein Hund Abby Beck :)</p>
+  <p >Grüße, Marie!</p>
+
+  <img class="" src="AbbyBeck.HEIC" alt="AbbyBeck">
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner small">
+    <span>© <span id="year"></span> Haus der Kruste</span>
+    <span>
+      <a href="impressum.html">Impressum</a> ·
+      <a href="contact.html">Kontakt</a>
+    </span>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

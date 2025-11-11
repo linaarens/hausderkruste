@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auflösung | Ermittlerabschluss – Haus der Kruste</title>
+  <meta name="description" content="Abschlussseite zur Auflösung des Falls in der Bäckerei Haus der Kruste." />
+  <style>
+    :root{
+      --bg:#0b0f14; --card:rgba(20,26,33,.72); --card-solid:#141a21; --accent:#ffd166; --accent-2:#e76f51; --muted:#a0a6ad; --text:#e8edf1; --focus:#72a0ff;
+    --success: #7bd88f;
+ }
+    *,*::before,*::after{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 10% 0%, #10151b 0%, transparent 60%),
+                  radial-gradient(900px 540px at 90% 100%, #0d1218 0%, transparent 60%),
+                  linear-gradient(180deg, #0a0e13 0%, #0b0f14 60%, #0a0e13 100%);
+      line-height:1.55;
+    }
+    .noise,.scanlines{ position:fixed; inset:0; pointer-events:none; opacity:.07; mix-blend-mode:overlay; }
+    .noise{ background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.25"/></svg>'); }
+    .scanlines{ background-image:repeating-linear-gradient(transparent 0 2px, rgba(255,255,255,.08) 2px 3px); opacity:.05; }
+
+    .container{ min-height:100vh; display:grid; place-items:center; padding:24px; }
+    .card{ width:min(980px,100%); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background:linear-gradient(180deg, rgba(20,26,33,.85), rgba(14,18,23,.85)); border:1px solid #1e2833; border-radius:24px; box-shadow:0 20px 60px rgba(0,0,0,.45); overflow:hidden; }
+
+.badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--success);          
+  box-shadow: 0 0 10px var(--success); 
+}
+
+    .badge {
+      position: absolute; top: 16px; left: 16px; display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(180deg, #10161d, #0c1117);
+      border: 1px solid #1f2a36; color: var(--muted); border-radius: 999px; padding: 6px 12px; font-size: 12px;
+    }
+    .badge .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--success); box-shadow: 0 0 10px var(--success); }
+
+    .hero{ position:relative; height:200px; background:
+      linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.75)),
+      url('introductionbild.jpg');
+      background-size:cover; background-position:center; }
+    .hero::after{ content:""; position:absolute; inset:0; background: radial-gradient(600px 160px at 20% 20%, rgba(255,209,102,.15), transparent 60%); }
+
+    .hero-bar{ position:absolute; inset-inline:0; bottom:0; display:flex; justify-content:space-between; align-items:center; gap:8px; padding:16px 20px; background:linear-gradient(180deg, transparent, rgba(10,14,19,.8)); border-top:1px solid rgba(255,255,255,.05); }
+    .logo{ font-weight:700; letter-spacing:.1em; text-transform:uppercase; font-size:14px; color:var(--accent); }
+    .case{ font-size:12px; color:var(--muted); }
+
+    .topnav { position: absolute; top: 12px; right: 12px; display: inline-flex; gap: 8px; z-index: 2; }
+    .top-actions{ position:absolute; top:12px; right:12px; display:flex; gap:8px; }
+    .btn{ --bg-btn:#1a2430; --bd-btn:#2a394b; --fg-btn:#e8edf1; display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:12px; font-weight:600; text-decoration:none; color:var(--fg-btn); background:var(--bg-btn); border:1px solid var(--bd-btn); cursor:pointer; transition:transform .06s ease, background .2s ease, border-color .2s ease; font-size:12px; }
+    .btn:hover{ transform:translateY(-1px); }
+    .btn:focus-visible{ outline:3px solid var(--focus); outline-offset:3px; }
+    .btn.primary{ --bg-btn:linear-gradient(180deg, #2a394b, #1a2430); --bd-btn:#3a4b61; }
+    .btn.ghost{ background:transparent; border-style:dashed; color:var(--muted); }
+
+    .content{ padding:22px 20px 24px; display:grid; gap:18px; }
+    h1{ margin:0; font-size: clamp(22px, 3.4vw, 30px); letter-spacing:.02em; }
+
+    .panel{ background:#0f141a; border:1px solid #203043; border-radius:16px; padding:14px; }
+    .label{ font-size:12px; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; }
+    .note{ color:#cbd2d8; font-size:14px; }
+    .warn{ color:var(--accent-2); font-weight:600; }
+    .ok{ color:#7bd88f; font-weight:700; }
+
+    .qa{ display:grid; gap:10px; }
+    fieldset{ border:none; margin:0; padding:0;}
+    legend{ font-weight:600; margin-bottom:8px;}
+    .choices{ display:grid; grid-template-columns: 1fr 1fr; gap:8px; }
+    .choice{ display:flex; align-items:center; gap:8px; background:#0b1217; border:1px solid #213143; border-radius:10px; padding:8px 10px; }
+    .choice input{ width:16px; height:16px; }
+
+    [hidden]{ display:none !important; }
+
+    @media (max-width: 760px){ .choices{ grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="scanlines"></div>
+
+    <span class="badge" aria-label="Systemstatus: Überwachung aktiv">
+      <span class="dot" aria-hidden="true"></span>
+      Sondereinheit · gesicherter Kanal 
+    </span>
+     <nav class="topnav" aria-label="Sektionen">
+<a href="introduction.html" class="btn primary sm" id="menuInfo">Start</a>
+<a href="introductioninfo.html" class="btn primary sm" id="menuSolve">Informationen</a>
+</nav>
+
+  <div class="container">
+    <main class="card" role="main" aria-labelledby="title">
+      <div class="hero" aria-hidden="true">
+        <div class="hero-bar">
+          <div>
+            <div class="logo">Haus der Kruste – Interne Ermittlung</div>
+            <div class="case">Auflösung · Polizei</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content" id="resolve">
+        <h1 id="title">Auflösung</h1>
+
+       
+        <section class="panel qa" aria-labelledby="q-accident">
+          <div class="label" id="q-accident">War der Tod des Auszubildenden ein Unfall?</div>
+          <div class="choices" role="group" aria-labelledby="q-accident">
+            <label class="choice"><input type="checkbox" id="accYes" /> <span>Ja</span></label>
+            <label class="choice"><input type="checkbox" id="accNo" /> <span>Nein</span></label>
+          </div>
+          <p class="note" id="accNote" hidden>Hinweis: Wähle genau eine Option. Bei „Nein“ folgen weitere Fragen.</p>
+        </section>
+
+        
+        <section class="panel qa" id="suspectSection" hidden>
+          <div class="label">Wer hat ihn umgebracht?</div>
+          <input type="text" id="suspectInput" placeholder="Vor- und Nachnamen eingeben" aria-label="Name der verdächtigen Person" style="background:#0b1217;border:1px solid #213143;border-radius:10px;padding:10px;color:var(--text);"/>
+          <p class="note" id="suspectNote" hidden>Nur fortfahren, wenn der Name korrekt ist.</p>
+        </section>
+
+       
+        <section class="panel" id="quizSection" hidden>
+          <div class="label">Beantworte die Fragen, um die Auflösung freizuschalten</div>
+
+          <fieldset class="qa" id="q1" aria-describedby="q1Note">
+            <h3>Frage 1: Was war die Mordwaffe?</h3>
+            <div class="choices" data-group="q1">
+              <label class="choice"><input type="checkbox" data-group="q1" data-correct="0"/> ein Messer</label>
+              <label class="choice"><input type="checkbox" data-group="q1" data-correct="1"/> eine Torte</label>
+              <label class="choice"><input type="checkbox" data-group="q1" data-correct="0"/> Drogen</label>
+              <label class="choice"><input type="checkbox" data-group="q1" data-correct="0"/> Erdnüsse</label>
+            </div>
+            <p class="note warn" id="q1Note" hidden>Nicht ganz – versuch es noch einmal.</p>
+          </fieldset>
+
+          <fieldset class="qa" id="q2" aria-describedby="q2Note" style="margin-top:12px;">
+            <h3>Frage 2: Woran ist Annegrets Enkelin gestorben?</h3>
+            <div class="choices" data-group="q2">
+              <label class="choice"><input type="checkbox" data-group="q2" data-correct="0"/> an einer Torte</label>
+              <label class="choice"><input type="checkbox" data-group="q2" data-correct="0"/> sie wurde erschossen</label>
+              <label class="choice"><input type="checkbox" data-group="q2" data-correct="1"/> an einer Überdosis</label>
+              <label class="choice"><input type="checkbox" data-group="q2" data-correct="0"/> sie wurde erstochen</label>
+            </div>
+            <p class="note warn" id="q2Note" hidden>Leider falsch. Prüfe die Hinweise auf der Website.</p>
+          </fieldset>
+
+          <fieldset class="qa" id="q3" aria-describedby="q3Note" style="margin-top:12px;">
+            <h3>Frage 3: Wer war Marcels Komplize bei seinen Drogengeschäften?</h3>
+            <div class="choices" data-group="q3">
+              <label class="choice"><input type="checkbox" data-group="q3" data-correct="0"/> Marie</label>
+              <label class="choice"><input type="checkbox" data-group="q3" data-correct="0"/> Martin</label>
+              <label class="choice"><input type="checkbox" data-group="q3" data-correct="0"/> Annegret</label>
+              <label class="choice"><input type="checkbox" data-group="q3" data-correct="1"/> Mirko</label>
+            </div>
+            <p class="note warn" id="q3Note" hidden>Das passt noch nicht. Schau dir die Indizien erneut an.</p>
+          </fieldset>
+
+          <div style="display:flex; gap:10px; margin-top:14px;">
+            <button class="btn primary" id="checkBtn">Antworten prüfen</button>
+            <button class="btn" id="resetBtn" title="Zurücksetzen">Zurücksetzen</button>
+          </div>
+        </section>
+
+        
+        <section class="panel" id="resultSection" hidden aria-live="polite">
+          <div class="label">Ergebnis</div>
+          <p class="note ok" id="successMsg" hidden>Glückwunsch! Alle Fragen wurden richtig beantwortet.</p>
+          <p class="note warn" id="failMsg" hidden>Es gibt noch Fehler. Verbessere deine Antworten.</p>
+          <div id="summary" class="note" hidden style="margin-top:8px;">
+            <strong>Auflösung (Zusammenfassung):</strong><br/>
+            Marcel hatte schon eine Anzeige wegen Drogenhandel auf seinem ehemaligen Arbeitsplatz. Sein Bruder Mirko hat ihn fest im Griff; er nötigt Marcel, auch in seinem neuen Ausbildungsbetrieb, dem Haus der Kruste, weiterzumachen. Doch das anfänglich kleine Drogenbusiness läuft außer Kontrolle. Die beiden verkaufen nicht gerade wenig. Marie Beck, die Werkstudentin, die die Website der Bäckerei betreut, bekommt davon mit. Zunächst macht es ihr nicht wirklich etwas aus, doch als eine Kundin von Mirko und Marcel mit nur 16 Jahren an einer Überdosis stirbt, versucht Marie Marcel zu überreden, mit seinen Machenschaften aufzuhören, bevor weitere schlimme Dinge passieren. Doch es ist bereits zu spät. Annegret Borsch, die Großmutter der Verstorbenen, bekommt schnell heraus, wer ihrer Enkelin die Drogen verkauft hat und nimmt das Schicksal selbst in die Hand. Als sie mal wieder in ihrer Stammbäckerei, dem Haus der Kruste, vorbeischaut und mit ihrer Lieblingsangestellten Fatima über Gott und die Welt redet, erfährt sie von dem Torten-Backwettbewerb. Und, dass Fatima keine Lust mehr auf die Bewertung der Torten hat und ihr Amt an Marcel abgibt. Also fährt Annegret kurzerhand nach Hause, backt eine mit Gift versetzte Torte und gibt sie im Haus der Kruste ab. Fatima stellt die Torte in den Kühlschrank. Sie vermerkt auf dem Bewertungszettel, dass diese unangenehm riecht und verfärbt ist und probiert sie deshalb nicht mehr vor ihrem Feierabend. Marcel hatte laut Dienstplan am nächsten Tag Schicht. Er sieht seinen Job in der Bäckerei eher entspannter und beachtet auch nicht, was Fatima zu den Torten vermerkt hat. Er probiert also die vergiftete Torte von Annegret und liegt Sekunden später nach Luft ringend am Boden. Marie ist die einzige, die eine Ahnung hat, was passiert ist. Doch dazu müsste sie der Polizei von den Drogengeschäften von Mirko berichten. Aus Angst vor ihm versuchte sie nun, die Ermittelnden unauffällig durch Hinweise auf der Website zu der richtigen Spur zu führen.
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      const accYes    = document.getElementById('accYes');
+      const accNo     = document.getElementById('accNo');
+      const accNote   = document.getElementById('accNote');
+      const suspectSection = document.getElementById('suspectSection');
+      const suspectInput   = document.getElementById('suspectInput');
+      const suspectNote    = document.getElementById('suspectNote');
+      const quizSection    = document.getElementById('quizSection');
+      const resultSection  = document.getElementById('resultSection');
+      const successMsg     = document.getElementById('successMsg');
+      const failMsg        = document.getElementById('failMsg');
+      const summary        = document.getElementById('summary');
+
+      
+      function enforceSingleAcc(){
+        if (this === accYes && accYes.checked) { accNo.checked = false; }
+        if (this === accNo  && accNo.checked)  { accYes.checked = false; }
+       
+        if (accNo.checked) {
+          suspectSection.hidden = false;
+          accNote.hidden = true;
+        } else {
+          suspectSection.hidden = true;
+          quizSection.hidden = true;
+          resultSection.hidden = true;
+          successMsg.hidden = true; failMsg.hidden = true; summary.hidden = true;
+        }
+      }
+      accYes.addEventListener('change', enforceSingleAcc);
+      accNo.addEventListener('change', enforceSingleAcc);
+
+     
+      function checkSuspect(){
+        const val = (suspectInput.value || '').trim().toLowerCase();
+        if (val === 'annegret borsch') {
+          quizSection.hidden = false;
+          suspectNote.hidden = true;
+        } else {
+          quizSection.hidden = true;
+          resultSection.hidden = true; successMsg.hidden = true; failMsg.hidden = true; summary.hidden = true;
+          if (val.length > 0) suspectNote.hidden = false; else suspectNote.hidden = true;
+        }
+      }
+      suspectInput.addEventListener('input', checkSuspect);
+
+      
+      document.querySelectorAll('input[type="checkbox"][data-group]').forEach(cb => {
+        cb.addEventListener('change', (e) => {
+          const group = e.target.getAttribute('data-group');
+          if (e.target.checked) {
+            document.querySelectorAll(`input[type="checkbox"][data-group="${group}"]`).forEach(other => {
+              if (other !== e.target) other.checked = false;
+            });
+          }
+        });
+      });
+
+    
+      const groups = ['q1','q2','q3'];
+      const notes = {
+        q1: document.getElementById('q1Note'),
+        q2: document.getElementById('q2Note'),
+        q3: document.getElementById('q3Note'),
+      };
+
+      function checkAnswers(){
+        let allCorrect = true;
+        groups.forEach(g => {
+          const selected = Array.from(document.querySelectorAll(`input[type="checkbox"][data-group="${g}"]`)).find(i => i.checked);
+          if (!selected) { allCorrect = false; notes[g].hidden = false; return; }
+          const ok = selected.getAttribute('data-correct') === '1';
+          if (!ok) { allCorrect = false; notes[g].hidden = false; }
+          else { notes[g].hidden = true; }
+        });
+
+        resultSection.hidden = false;
+        if (allCorrect) {
+          failMsg.hidden = true;
+          successMsg.hidden = false;
+          summary.hidden = false;
+          resultSection.scrollIntoView({behavior:'smooth', block:'start'});
+        } else {
+          successMsg.hidden = true;
+          summary.hidden = true;
+          failMsg.hidden = false;
+        }
+      }
+
+      document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+      document.getElementById('resetBtn').addEventListener('click', () => {
+        groups.forEach(g => {
+          document.querySelectorAll(`input[type="checkbox"][data-group="${g}"]`).forEach(i => i.checked = false);
+          notes[g].hidden = true;
+        });
+        failMsg.hidden = true; successMsg.hidden = true; summary.hidden = true;
+      });
+    })();
+  </script>
+</body>
+</html>

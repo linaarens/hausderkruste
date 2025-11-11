@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leon Müller – Bäckerei XY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<header class="header">
+  <div class="container header__bar">
+    <a class="brand" href="../index.html" aria-label="Startseite">
+      <span class="brand__logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12c0-4.418 3.582-8 8-8 3.314 0 6 2.686 6 6v6a2 2 0 0 1-2 2H8a4 4 0 0 1-4-4v-2Z" fill="white"/><path d="M9 9c0-1 .8-1.8 1.8-1.8M12 10c0-1 .8-1.8 1.8-1.8M15 11c0-1 .8-1.8 1.8-1.8" stroke="#8B5E34" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand__title">Bäckerei</span>
+    </a>
+    <button class="menu-toggle">Menü</button>
+    <nav class="menu-panel" aria-label="Hauptmenü">
+      <a href="../about.html">Über uns</a>
+      <a href="../services.html">Leistungen</a>
+      <a href="../team.html">Mitarbeitende</a>
+      <a href="../contact.html">Kontakt</a>
+      <a href="../impressum.html">Impressum</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container section">
+  <article class="profile">
+    <img class="profile__img" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=1600&auto=format&fit=crop" alt="Leon Müller">
+    <div>
+      <h1 class="m0">Leon Müller</h1>
+      <p class="mt8" style="color:var(--clr-muted)">Bäcker (Sauerteig)</p>
+      <p class="mt16">Leons Leidenschaft ist Sauerteig. Mit Ruhezeiten und Temperatur spielt er meisterhaft, damit Kruste und Krume perfekt harmonieren.</p>
+      <p class="mt8"><a class="btn" href="../team.html">Zurück zum Team</a></p>
+    </div>
+  </article>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner small">
+    <span>© <span id="year"></span> Bäckerei XY</span>
+    <span>
+      <a href="../impressum.html">Impressum</a> ·
+      <a href="../contact.html">Kontakt</a>
+    </span>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
