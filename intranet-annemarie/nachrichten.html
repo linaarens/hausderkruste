@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intranet – Nachrichten</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="intranet.css">
+  <style>
+    
+    .chat-card{ height: min(78vh, 860px); background: var(--intra-surface); border-radius: var(--intra-radius); box-shadow: var(--intra-shadow); overflow: hidden; }
+    .chat-layout{ display: grid; grid-template-columns: 320px 1fr; height: 100%; }
+    @media (max-width: 980px){ .chat-layout{ grid-template-columns: 1fr } .chat-sidebar{ display:none } .chat-layout.show-left .chat-sidebar{ display:block } }
+
+   
+    .chat-sidebar{ border-right:1px solid rgba(0,0,0,.06); background:#F3F6F2; display:flex; flex-direction:column; }
+    .chat-sidebar__head{ padding:12px 12px; display:flex; align-items:center; gap:10px; border-bottom:1px solid rgba(0,0,0,.06); }
+    .chat-search{ width:100%; }
+    .chat-search input{ width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(0,0,0,.1); background:#fff; }
+    .chat-list{ overflow:auto; }
+    .chat-item{ display:flex; align-items:center; gap:12px; padding:12px; cursor:pointer; border-bottom:1px solid rgba(0,0,0,.04); background:transparent; }
+    .chat-item:hover{ background:#EEF5F0 }
+    .chat-item.active{ background:#E7F4EE }
+    .avatar{ width:44px; height:44px; border-radius:50%; display:grid; place-items:center; font-weight:800; color:#fff; box-shadow: var(--intra-shadow); }
+    .av--group{ background: linear-gradient(135deg,#6C5A3F,#3FA27C); }
+    .av--a{ background:#7E6A4C } .av--f{ background:#3FA27C } .av--m{ background:#5E7A6B } .av--mw{ background:#6C5A3F } .av--l{ background:#4A6656 }
+    .chat-meta{ flex:1; min-width:0 }
+    .chat-title{ font-weight:700; }
+    .chat-snippet{ color: var(--intra-muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    
+    .chat-main{ display:grid; grid-template-rows: auto 1fr auto; height:100%; }
+    .chat-main__head{ padding:10px 14px; border-bottom:1px solid rgba(0,0,0,.06); display:flex; align-items:center; gap:10px; }
+    .chat-main__head .avatar{ width:36px; height:36px; font-size:12px }
+    .chat-title-big{ font-weight:800; }
+
+    
+    .chat-messages{
+      position:relative; overflow:auto; padding:16px; background:
+        radial-gradient(circle at 10% 10%, rgba(63,162,124,.08) 2px, transparent 3px) 0 0/22px 22px,
+        radial-gradient(circle at 60% 30%, rgba(108,90,63,.06) 2px, transparent 3px) 0 0/28px 28px,
+        #F7F9F6;
+    }
+    .thread{ display:none; }
+    .thread.active{ display:block; }
+
+    .bubble{ max-width: min(72%, 640px); padding:10px 12px; border-radius:14px; margin:6px 0; position:relative; word-wrap:break-word; background:#fff; border:1px solid rgba(0,0,0,.06); }
+    .bubble--in{ background:#FFFFFF; }
+    .bubble--out{ background:#DDF5EA; border-color: rgba(63,162,124,.25); margin-left:auto }
+    .bubble:empty::after{ content:"Text einfügen"; color: #88938C; opacity:.6 }
+    .msg-group{ display:flex; flex-direction:column; }
+
+    .compose{ display:flex; gap:8px; padding:10px; border-top:1px solid rgba(0,0,0,.06); background:#F1F5F2 }
+    .compose textarea{ flex:1; min-height:42px; max-height:160px; padding:10px 12px; border-radius:12px; border:1px solid rgba(0,0,0,.12); resize:vertical; background:#fff }
+    .compose button{ white-space:nowrap }
+
+    
+    .muted{ color: var(--intra-muted) }
+    .hide-on-mobile{ display:block } @media (max-width:980px){ .hide-on-mobile{ display:none } }
+
+    
+.chat-messages{ position:relative; overflow:auto; scroll-behavior:smooth; }
+.scroll-btn{
+  position:absolute; right:12px; bottom:12px; z-index:10;
+  display:none; padding:8px 12px; border-radius:999px;
+  background: var(--intra-primary); color:#fff; box-shadow: var(--intra-shadow);
+  font-weight:700; border:0; cursor:pointer;
+}
+.scroll-btn.show{ display:inline-flex; }
+
+
+
+.messages-page .section--intra{ padding-block: 8px; } 
+.messages-page .chat-card{
+  
+  height: calc(90dvh - var(--intra-header));
+}
+
+
+.messages-page .chat-layout,
+.messages-page .chat-main,
+.messages-page .chat-sidebar{ min-height: 0; }
+
+
+.messages-page .chat-messages{
+  overflow: auto;
+  overscroll-behavior: contain;  
+  scroll-behavior: smooth;
+}
+
+
+.messages-page .chat-sidebar{ display:flex; flex-direction:column; }
+.messages-page .chat-list{ flex:1; overflow:auto; min-height:0; }
+
+  </style>
+</head>
+<body class="intranet messages-page"> 
+
+
+<header class="intra-header">
+  <div class="container--intra intra-header__bar">
+    <a class="intra-brand" href="index.html" aria-label="Zur Website">
+      <span class="brand__logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 12c0-4.418 3.582-8 8-8 3.314 0 6 2.686 6 6v6a2 2 0 0 1-2 2H8a4 4 0 0 1-4-4v-2Z" fill="white"/>
+          <path d="M9 9c0-1 .8-1.8 1.8-1.8M12 10c0-1 .8-1.8 1.8-1.8M15 11c0-1 .8-1.8 1.8-1.8" stroke="#8B5E34" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="intra-brand__title">Intranet</span>
+    </a>
+    <button class="menu-toggle">Menü</button>
+    <nav class="menu-panel">
+  <a href="index.html">Start</a>
+  <a href="dienstplan.html">Dienstplan</a>
+  <a href="verwaltung.html">Verwaltung</a>
+  <a href="rezepte.html">Rezepte</a>
+  <a href="nachrichten.html">Nachrichten</a>
+</nav>
+
+  </div>
+</header>
+<p></p>
+<main class="container--intra section--intra">
+  <div class="chat-card">
+    <div class="chat-layout" id="chatLayout">
+      
+      <aside class="chat-sidebar">
+        <div class="chat-sidebar__head">
+          <div class="chat-search"><input type="search" id="chatSearch" placeholder="Suchen …"></div>
+        </div>
+        <div class="chat-list" id="chatList">
+          <div class="chat-item active" data-chat="chat-group">
+            <div class="avatar av--group">HK</div>
+            <div class="chat-meta"><div class="chat-title">Haus der Kruste (Gruppe)</div><div class="chat-snippet">…</div></div>
+          </div>
+          <div class="chat-item" data-chat="chat-markus">
+            <div class="avatar av--a">MW</div>
+            <div class="chat-meta"><div class="chat-title">Markus Wagner</div><div class="chat-snippet">…</div></div>
+          </div>
+          <div class="chat-item" data-chat="chat-fatima">
+            <div class="avatar av--f">FÖ</div>
+            <div class="chat-meta"><div class="chat-title">Fatima Özdemir</div><div class="chat-snippet">…</div></div>
+          </div>
+          <div class="chat-item" data-chat="chat-martin">
+            <div class="avatar av--m">MW</div>
+            <div class="chat-meta"><div class="chat-title">Martin Weiss</div><div class="chat-snippet">…</div></div>
+          </div>
+          <div class="chat-item" data-chat="chat-marie">
+            <div class="avatar av--mw">MB</div>
+            <div class="chat-meta"><div class="chat-title">Marie Beck</div><div class="chat-snippet">…</div></div>
+          </div>
+          <div class="chat-item" data-chat="chat-marcel">
+            <div class="avatar av--mw">MaW</div>
+            <div class="chat-meta"><div class="chat-title">Marcel Walde</div><div class="chat-snippet">…</div></div>
+          </div>
+        </div>
+      </aside>
+
+      
+      <section class="chat-main">
+        <div class="chat-main__head">
+          <div class="avatar av--group" id="headAvatar">HK</div>
+          <div>
+            <div class="chat-title-big" id="headTitle">Haus der Kruste (Gruppe)</div>
+            <div class="muted small" id="headSub">online</div>
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          
+          <div class="thread active" id="chat-group">
+            <div class="msg-group">
+              <div class="bubble bubble--in">Krass, das mit Marcel... Ich weiß immer noch nicht, wie ich das verarbeiten soll...</div>
+              <div class="bubble bubble--in">Ja oder? Vor allem das kam so plötzlich. Weiß man schon was Neues von den Behörden?</div>
+               <div class="bubble bubble--out">Bei einem Bekannten von mir war das auch so ähnlich. Er hatte ne Nussallergie und auf einmal so nen Schock. Zack, tot.</div>
+               <div class="bubble bubble--in">Echt traurig. Er war nicht mal mit der Ausbildung fertig. Die arme Familie.</div>
+                <div class="bubble bubble--in">So ein dummer Unfall.</div>
+            </div>
+          </div>
+
+          <div class="thread" id="chat-markus">
+             <div class="msg-group">
+              <div class="bubble bubble--out">Hey Schatz, ich bin schonmal losgefahren. Muss paar Sachen vorbereiten.</div>
+              <div class="bubble bubble--in">Okay! Ich bringe noch die kleine Lisa zur Oma und komme dann nach. Was möchtest du frühstücken? Ich bringe dir was mit.</div>
+               <div class="bubble bubble--out">Schatz, wir haben eine Bäckerei. Ich esse einfach etwas aus der Theke.</div>
+              <div class="bubble bubble--in">Ach stimmt ja. Okay! Sag Bescheid, wenn ich dir noch etwas Gutes tun kann! Ich liebe dich! Du bist mein Leben!!</div>
+            </div>
+          </div>
+
+          <div class="thread" id="chat-fatima">
+             <div class="msg-group">
+              <div class="bubble bubble--out">Fatima, wie läuft es heute?</div>
+              <div class="bubble bubble--in">Gut soweit, nur Lucy war wieder da und hat mich über Marcel ausfragen wollen. Sie hat viel geweint.</div>
+              <div class="bubble bubble--in">Ich verstehe ja, das eine Trennung sehr schwer sein kann aber muss sie wirklich so oft an seinem Arbeitsplatz auftauchen? Es nervt langsam wirklich und die anderen Kunden werden abgeschreckt. Kannst du ihr irgendwie Hausverbot geben?</div>
+           <div class="bubble bubble--out">Ich schaue mal, was ich machen kann.</div>
+            </div>
+          </div>
+
+          <div class="thread" id="chat-martin">
+             <div class="msg-group">
+              <div class="bubble bubble--out">Super gemacht mit dem Intranet und dem EC-System. Danke dir, das hat mir wirklich unglaublich geholfen. Ich werde dir diesen Monat auf jeden Fall einen Bonus auszahlen!</div>
+              <div class="bubble bubble--in">Danke Annemarie!</div>
+            </div>
+          </div>
+
+          <div class="thread" id="chat-marie">
+           <div class="msg-group">
+              <div class="bubble bubble--out">Hey Marie, das neue Intranet ist wirklich super geworden! Ich zahle dir diesen Monat einen Bonus aus. Bleibst du dran an dem neuen Update für die Website?</div>
+              <div class="bubble bubble--in">Danke! Ja, mache ich.</div>
+              <div class="bubble bubble--in">Marcel hatte dir ja schon gesagt, dass es mit deinem Passwort Probleme gab. Wir haben dir ein Neues angelegt, ich bin mir nur unsicher, wie ich dir das am besten mitteilen kann. Martin legt ja großen Wert auf Sicherheit und Geheimhaltung.</div>
+<div class="bubble bubble--out">Stimmt, ich sehe euch zwei diese Woche ja nicht mehr, aber das Passwort bräuchte ich dringend. Kannst du mir das vielleicht verschlüsselt geben?</div>
+<div class="bubble bubble--in">Ja, ich habe eine Idee. Ich habe es in unserer Website versteckt. Schau dir einfach die Worte über meiner Anmerkung an. Keine Zeichen, nur die ersten Buchstaben. Achte auf Groß- und Kleinschreibung.</div>
+<div class="bubble bubble--out">Das ist perfekt, Danke!</div>
+            </div>
+          </div>
+
+          <div class="thread" id="chat-marcel">
+            <div class="msg-group">
+              <div class="bubble bubble--out">Marcel, kannst du dich diese Woche um den Backwettbewerb kümmern? Fatima kommt nicht mehr hinterher...</div>
+              <div class="bubble bubble--in">Klar, was muss ich da machen?</div>
+              <div class="bubble bubble--out">Probiere einfach alle eingehenden Torten und ranke sie dann in der Wettbewerbsliste.</div>
+               <div class="bubble bubble--in">Das klingt super! Da opfere ich mich doch gerne, hahah.</div>
+            </div>
+          </div>
+
+          <div class="thread" id="chat-leon">
+            <div class="msg-group">
+              <div class="bubble bubble--in"></div>
+              <div class="bubble bubble--out"></div>
+            </div>
+          </div>
+        </div>
+
+        <form class="compose" id="composeForm" action="#" method="post" autocomplete="off">
+          <textarea id="msgInput" placeholder="Nachricht schreiben …"></textarea>
+          <button class="btn" type="submit">Senden</button>
+        </form>
+      </section>
+    </div>
+  </div>
+  <p></p>
+</main>
+
+<footer class="intra-footer">
+  <div class="container--intra intra-footer__inner small">
+    <span>© <span id="year"></span> Haus der Kruste · Intranet</span>
+    <span><a href="index.html">Start</a></span>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+
+
+
+<script>
+(function(){
+  const list       = document.getElementById('chatList');
+  const threads    = Array.from(document.querySelectorAll('.thread'));
+  const headTitle  = document.getElementById('headTitle');
+  const headAvatar = document.getElementById('headAvatar');
+  const compose    = document.getElementById('composeForm');
+  const input      = document.getElementById('msgInput');
+  const wrap       = document.getElementById('chatMessages');
+  if(!list || !wrap) return;
+
+  
+  let scrollBtn = document.getElementById('scrollToBottom');
+  if(!scrollBtn){
+    scrollBtn = document.createElement('button');
+    scrollBtn.id = 'scrollToBottom';
+    scrollBtn.type = 'button';
+    scrollBtn.className = 'scroll-btn';
+    scrollBtn.setAttribute('aria-label','Zum neuesten');
+    scrollBtn.textContent = '↓ Neueste';
+    wrap.appendChild(scrollBtn);
+  }
+
+  
+  function atBottom(){
+    return Math.abs(wrap.scrollHeight - wrap.scrollTop - wrap.clientHeight) < 4;
+  }
+  function scrollToBottom(){
+    wrap.scrollTo({ top: wrap.scrollHeight, behavior: 'smooth' });
+  }
+  function updateScrollUI(){
+    scrollBtn.classList.toggle('show', !atBottom());
+  }
+
+  wrap.addEventListener('scroll', updateScrollUI);
+  scrollBtn.addEventListener('click', scrollToBottom);
+
+  function pickClass(title){
+    const t = title.toLowerCase();
+    if(t.includes('gruppe') || t.includes('kruste')) return 'av--group';
+    if(t.includes('annemarie')) return 'av--a';
+    if(t.includes('fatima'))    return 'av--f';
+    if(t.includes('martin'))    return 'av--m';
+    if(t.includes('marcel'))    return 'av--mw';
+    if(t.includes('leon'))      return 'av--l';
+    return 'av--group';
+  }
+  function getInitials(title){
+    const p = title.trim().split(/\s+/);
+    if(p.length === 1) return { txt: p[0].slice(0,2).toUpperCase(), cls:'av--group' };
+    return { txt: (p[0][0] + p[p.length-1][0]).toUpperCase(), cls: pickClass(title) };
+  }
+  function updateSnippets(){
+    Array.from(list.querySelectorAll('.chat-item')).forEach(item=>{
+      const id  = item.dataset.chat;
+      const thr = document.getElementById(id);
+      const last= thr ? thr.querySelector('.bubble:last-of-type') : null;
+      const sn  = item.querySelector('.chat-snippet');
+      if(sn) sn.textContent = last && last.textContent.trim() ? last.textContent.trim() : '…';
+    });
+  }
+  function setActive(chatId, titleText, initialsClass, initialsText){
+    threads.forEach(t => t.classList.toggle('active', t.id === chatId));
+    Array.from(list.querySelectorAll('.chat-item')).forEach(i => i.classList.toggle('active', i.dataset.chat === chatId));
+    headTitle.textContent = titleText;
+    headAvatar.className  = 'avatar ' + initialsClass;
+    headAvatar.textContent= initialsText;
+    
+    requestAnimationFrame(()=>{ scrollToBottom(); updateScrollUI(); });
+    input && input.focus();
+  }
+
+  
+  list.addEventListener('click', (e)=>{
+    const item  = e.target.closest('.chat-item'); if(!item) return;
+    const chatId= item.dataset.chat;
+    const title = item.querySelector('.chat-title')?.textContent || '';
+    const {txt, cls} = getInitials(title);
+    setActive(chatId, title, cls, txt);
+  });
+
+  
+  function appendOutgoing(text){
+    const active = document.querySelector('.thread.active .msg-group');
+    if(!active) return;
+    const b = document.createElement('div');
+    b.className = 'bubble bubble--out';
+    b.textContent = text;
+    active.appendChild(b);
+    scrollToBottom();
+    updateScrollUI();
+    updateSnippets();
+  }
+  compose?.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const txt = (input?.value || '').replace(/\s+$/,'');
+    if(!txt) return;
+    appendOutgoing(txt);
+    input.value = '';
+    input.focus();
+  });
+  input?.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' && !e.shiftKey){
+      e.preventDefault();
+      compose?.dispatchEvent(new Event('submit', {cancelable:true}));
+    }
+  });
+
+ 
+  const defaultItem = list.querySelector('.chat-item.active') || list.querySelector('.chat-item');
+  if(defaultItem){
+    const title = defaultItem.querySelector('.chat-title')?.textContent || '';
+    const {txt, cls} = getInitials(title);
+    setActive(defaultItem.dataset.chat, title, cls, txt);
+  }
+  updateSnippets();
+
+ 
+  const y = document.getElementById('year');
+  if(y) y.textContent = new Date().getFullYear();
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

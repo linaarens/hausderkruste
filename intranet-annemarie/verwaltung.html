@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intranet – Verwaltung (Martin)</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="intranet.css">
+</head>
+<body class="intranet">
+<header class="intra-header">
+  <div class="container--intra intra-header__bar">
+    <a class="intra-brand" href="index.html" aria-label="Zur Website">
+      <span class="brand__logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 12c0-4.418 3.582-8 8-8 3.314 0 6 2.686 6 6v6a2 2 0 0 1-2 2H8a4 4 0 0 1-4-4v-2Z" fill="white"/>
+          <path d="M9 9c0-1 .8-1.8 1.8-1.8M12 10c0-1 .8-1.8 1.8-1.8M15 11c0-1 .8-1.8 1.8-1.8" stroke="#8B5E34" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="intra-brand__title">Intranet</span>
+    </a>
+    <button class="menu-toggle">Menü</button>
+    <nav class="menu-panel">
+      <a href="index.html">Start</a>
+      <a href="dienstplan.html">Dienstplan</a>
+      <a href="verwaltung.html">Verwaltung</a>
+      <a href="rezepte.html">Rezepte</a>
+      <a href="nachrichten.html">Nachrichten</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container--intra section--intra">
+  <h1>Verwaltung</h1>
+  <p class="small" style="color:var(--intra-muted)">Dokumente als PDF</p>
+
+  
+  <section class="recipe-section">
+    <h2>Backwettbewerb</h2>
+    <div class="grid-3 mt8">
+      <a class="pdf-card" href="docs/WettbewerbTeilnehmende.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/WettbewerbTeilnehmende.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Teilnehmerliste 2025</span>
+      </a>
+
+      <a class="pdf-card" href="docs/WettbewerbBewertung.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/WettbewerbBewertung.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Bewertung</span>
+      </a>
+    </div>
+  </section>
+
+  
+  <section class="recipe-section">
+    <h2>Personal &amp; Organisation</h2>
+    <div class="grid-3 mt8">
+      <a class="pdf-card" href="docs/PersobogenMarkus.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/PersobogenMarkus.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Markus Wagner</span>
+      </a>
+
+      <a class="pdf-card" href="docs/PersobogenFatima.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/PersobogenFatima.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Fatima Özdemir</span>
+      </a>
+
+      <a class="pdf-card" href="docs/PersobogenMartin.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/PersobogenMartin.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Martin Weiss</span>
+      </a>
+    </div>
+
+    <div class="grid-3 mt8">
+      <a class="pdf-card" href="docs/PersobogenMarie.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/PersobogenMarie.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Marie Beck</span>
+      </a>
+
+      <a class="pdf-card" href="docs/PersobogenMarcel.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/PersobogenMarcel.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Marcel Walde</span>
+      </a>
+    </div>
+    
+    <div class="grid-3 mt8">
+       <a class="pdf-card" href="docs/PasswoerterIntranet.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/PasswoerterIntranet.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Passwörter Intranet</span>
+      </a>
+    </div>
+  </section>
+
+  
+  <section class="recipe-section">
+    <h2>Juristisches</h2>
+    <div class="grid-3 mt8">
+      <a class="pdf-card" href="docs/Polizeibericht.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/Polizeibericht.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Bericht Polizei</span>
+      </a>
+
+      <a class="pdf-card" href="docs/anonymeBeschwerde25_10.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/anonymeBeschwerde25_10.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Anonyme Notiz</span>
+      </a>
+
+       <a class="pdf-card" href="docs/SchreibenPolizei.pdf" target="_blank" rel="noopener">
+        <object class="pdf-card__preview" data="docs/SchreibenPolizei.pdf" type="application/pdf">
+          <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+        </object>
+        <span class="pdf-card__label">Schreiben Polizei</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="intra-footer">
+  <div class="container--intra intra-footer__inner small">
+    <span>© <span id="year"></span> Haus der Kruste · Intranet</span>
+    <span><a href="index.html">Start</a></span>
+  </div>
+</footer>
+<script src="main.js" defer></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

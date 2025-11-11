@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intranet – Dienstplan</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="intranet.css">
+</head>
+<body class="intranet">
+<header class="intra-header">
+  <div class="container--intra intra-header__bar">
+    <a class="intra-brand" href="index.html" aria-label="Zur Website">
+      <span class="brand__logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 12c0-4.418 3.582-8 8-8 3.314 0 6 2.686 6 6v6a2 2 0 0 1-2 2H8a4 4 0 0 1-4-4v-2Z" fill="white"/>
+          <path d="M9 9c0-1 .8-1.8 1.8-1.8M12 10c0-1 .8-1.8 1.8-1.8M15 11c0-1 .8-1.8 1.8-1.8" stroke="#8B5E34" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="intra-brand__title">Intranet</span>
+    </a>
+    <button class="menu-toggle">Menü</button>
+    <nav class="menu-panel">
+      <a href="index.html">Start</a>
+      <a href="dienstplan.html">Dienstplan</a>
+      <a href="verwaltung.html">Verwaltung</a>
+      <a href="rezepte.html">Rezepte</a>
+      <a href="nachrichten.html">Nachrichten</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container--intra section--intra">
+  <h1>Dienstpläne</h1>
+  <p class="small" style="color:var(--intra-muted)">Klicke auf eine Vorschau, um den jeweiligen PDF-Plan zu öffnen.</p>
+
+ <div class="grid-3 mt16">
+    
+    <a class="pdf-card" href="docs/DienstplanJuni.pdf" target="_blank" rel="noopener">
+      <object class="pdf-card__preview" data="docs/DienstplanJuni.pdf" type="application/pdf">
+        <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+      </object>
+      <span class="pdf-card__label">Juni 2025</span>
+    </a>
+
+    
+    <a class="pdf-card" href="docs/DienstplanJuli.pdf" target="_blank" rel="noopener">
+      <object class="pdf-card__preview" data="docs/DienstplanJuli.pdf" type="application/pdf">
+        <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+      </object>
+      <span class="pdf-card__label">Juli 2025</span>
+    </a>
+
+    
+    <a class="pdf-card" href="docs/DienstplanAugust.pdf" target="_blank" rel="noopener">
+      <object class="pdf-card__preview" data="docs/DienstplanAugust.pdf" type="application/pdf">
+        <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+      </object>
+      <span class="pdf-card__label">August 2025</span>
+    </a>
+
+   
+    <a class="pdf-card" href="docs/DienstplanSeptember.pdf" target="_blank" rel="noopener">
+      <object class="pdf-card__preview" data="docs/DienstplanSeptember.pdf" type="application/pdf">
+        <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+      </object>
+      <span class="pdf-card__label">September 2025</span>
+    </a>
+
+    
+    <a class="pdf-card" href="docs/DienstplanOktober.pdf" target="_blank" rel="noopener">
+      <object class="pdf-card__preview" data="docs/DienstplanOktober.pdf" type="application/pdf">
+        <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+      </object>
+      <span class="pdf-card__label">Oktober 2025</span>
+    </a>
+
+    
+    <a class="pdf-card" href="docs/DienstplanNovember.pdf" target="_blank" rel="noopener">
+      <object class="pdf-card__preview" data="docs/DienstplanNovember.pdf" type="application/pdf">
+        <div class="pdf-card__fallback">Vorschau nicht verfügbar</div>
+      </object>
+      <span class="pdf-card__label">November 2025</span>
+    </a>
+  </div>
+</main>
+
+<footer class="intra-footer">
+  <div class="container--intra intra-footer__inner small">
+    <span>© <span id="year"></span> Haus der Kruste · Intranet</span>
+    <span><a href="index.html">Start</a></span>
+  </div>
+</footer>
+<script src="main.js" defer></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
