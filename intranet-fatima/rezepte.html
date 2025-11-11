@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intranet – Rezepte</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="intranet.css">
+</head>
+<body class="intranet">
+<header class="intra-header">
+  <div class="container--intra intra-header__bar">
+    <a class="intra-brand" href="index.html" aria-label="Zur Website">
+      <span class="brand__logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 12c0-4.418 3.582-8 8-8 3.314 0 6 2.686 6 6v6a2 2 0 0 1-2 2H8a4 4 0 0 1-4-4v-2Z" fill="white"/>
+          <path d="M9 9c0-1 .8-1.8 1.8-1.8M12 10c0-1 .8-1.8 1.8-1.8M15 11c0-1 .8-1.8 1.8-1.8" stroke="#8B5E34" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="intra-brand__title">Intranet</span>
+    </a>
+    <button class="menu-toggle">Menü</button>
+    <nav class="menu-panel">
+      <a href="index.html">Start</a>
+      <a href="dienstplan.html">Dienstplan</a>
+      <a href="rezepte.html">Rezepte</a>
+      <a href="verwaltung.html">Verwaltung</a>
+      <a href="nachrichten.html">Nachrichten</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container--intra section--intra">
+  <h1>Rezepte</h1>
+  <p class="small" style="color:var(--intra-muted)">Interne Produktionsrezepte</p>
+
+ 
+  <section class="recipe-section">
+    <h2>Kuchen</h2>
+    <div class="recipe-grid mt8">
+      <article class="recipe-card">
+        <h4>Rührkuchen Zitrone</h4><div class="meta">Allergene: Ei, Gluten, Milch</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-zitrone">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Apfelkuchen Blech</h4><div class="meta">Allergene: Gluten, Ei, Milch</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-apfelblech">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Mohnkuchen</h4><div class="meta">Allergene: Milch, Gluten, Ei</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-mohn">Ansehen</button></div>
+      </article>
+    </div>
+  </section>
+
+ 
+  <section class="recipe-section">
+    <h2>Torten</h2>
+    <div class="recipe-grid mt8">
+      <article class="recipe-card">
+        <h4>Schwarzwälder Kirschtorte</h4><div class="meta">Allergene: Ei, Milch, Gluten, Alkohol</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-schwarzwaelder">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Himbeer-Mascarpone-Torte</h4><div class="meta">Allergene: Milch, Gluten, Ei</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-himbeer">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Schokotorte Ganache</h4><div class="meta">Allergene: Milch, Gluten, Ei</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-ganache">Ansehen</button></div>
+      </article>
+    </div>
+  </section>
+
+ 
+  <section class="recipe-section">
+    <h2>Muffins</h2>
+    <div class="recipe-grid mt8">
+      <article class="recipe-card">
+        <h4>Blaubeer-Muffins</h4><div class="meta">Allergene: Ei, Gluten, Milch</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-blaubeer">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Schoko-Muffins</h4><div class="meta">Allergene: Ei, Gluten, Milch, Soja</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-schokomuffin">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Banane-Walnuss-Muffins</h4><div class="meta">Allergene: Nüsse, Ei, Gluten</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-banane-walnuss">Ansehen</button></div>
+      </article>
+    </div>
+  </section>
+
+
+  <section class="recipe-section">
+    <h2>Brot &amp; Brötchen</h2>
+    <div class="recipe-grid mt8">
+      <article class="recipe-card">
+        <h4>Sauerteigbrot (70/30)</h4><div class="meta">Allergene: Gluten</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-sauerteig">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Mehrkornbrot</h4><div class="meta">Allergene: Gluten, Sesam</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-mehrkorn">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Weizenbrötchen Direktführung</h4><div class="meta">Allergene: Gluten</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-weizenbroetchen">Ansehen</button></div>
+      </article>
+    </div>
+  </section>
+
+
+  <section class="recipe-section">
+    <h2>Feingebäck &amp; Kekse</h2>
+    <div class="recipe-grid mt8">
+      <article class="recipe-card">
+        <h4>Butterplätzchen</h4><div class="meta">Allergene: Milch, Gluten, Ei</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-butterplaetzchen">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Hafer-Cranberry-Cookies</h4><div class="meta">Allergene: Gluten (Hafer), Ei</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-cookies">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Zimtschnecken</h4><div class="meta">Allergene: Milch, Gluten, Ei</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-zimtschnecken">Ansehen</button></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="recipe-section">
+    <h2>Spezial</h2>
+    <div class="recipe-grid mt8">
+      <article class="recipe-card">
+        <h4>Glutenfreies Buchweizenbrot</h4><div class="meta">Allergene: –</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-buchweizen">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Vegane Schokotorte</h4><div class="meta">Allergene: Soja (je nach Schokolade)</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-vegane-schokotorte">Ansehen</button></div>
+      </article>
+      <article class="recipe-card">
+        <h4>Laktosefreie Käsekuchen-Füllung</h4><div class="meta">Allergene: Ei</div>
+        <div class="actions"><button class="btn js-open-recipe" data-tpl="tpl-lf-kaesekuchen">Ansehen</button></div>
+      </article>
+    </div>
+  </section>
+
+  
+  <div id="recipe-modal" class="modal" aria-hidden="true">
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="recipe-title">
+      <div class="modal__header">
+        <h3 id="recipe-title" class="modal__title">Rezept</h3>
+        <button class="modal__close" type="button" aria-label="Schließen">Schließen</button>
+      </div>
+      <div class="modal__body" id="recipe-body"></div>
+    </div>
+  </div>
+
+ 
+  <template id="tpl-zitrone">
+    <p><strong>Ergibt:</strong> 1 Kasten (25 cm) · <strong>Backen:</strong> 180 °C O/U · 50–55 Min</p>
+    <h4>Zutaten</h4>
+    <ul>
+      <li>180 g weiche Butter</li><li>160 g Zucker</li><li>4 Eier (M)</li>
+      <li>1 Bio-Zitrone (Abrieb) + 40 ml Zitronensaft</li>
+      <li>250 g Weizenmehl Type 405</li><li>10 g Backpulver</li><li>2 g Salz</li><li>60 g Milch</li>
+      <li><em>Guss:</em> 120 g Puderzucker + 25–30 g Zitronensaft</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Form fetten, Ofen vorheizen. Butter und Zucker 3 Min cremig schlagen, Eier nacheinander einrühren.</li>
+      <li>Trockene Zutaten mischen, abwechselnd mit Milch + Zitronensaft kurz unterrühren, Abrieb zugeben.</li>
+      <li>Teig einfüllen, backen. 10 Min abkühlen, stürzen, mit Guss überziehen.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-apfelblech">
+    <p><strong>Ergibt:</strong> 1 Blech · <strong>Backen:</strong> 200 °C O/U · 25–30 Min</p>
+    <h4>Hefeteig</h4>
+    <ul>
+      <li>500 g Weizenmehl Type 550</li><li>250 g Milch (lauwarm)</li><li>60 g weiche Butter</li>
+      <li>70 g Zucker</li><li>1 Ei</li><li>20 g frische Hefe</li><li>7 g Salz</li>
+    </ul>
+    <h4>Belag</h4>
+    <ul>
+      <li>1,5 kg Äpfel (säuerlich)</li><li>80 g Zucker + Zimt</li><li>50 g Semmelbrösel</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Teig 8–10 Min kneten, 60 Min gehen lassen.</li>
+      <li>Auf Blech ausrollen, mit Bröseln bestreuen, Apfelspalten dicht legen, mit Zimt-Zucker bestreuen.</li>
+      <li>15 Min Stückgare, dann backen. Optional aprikotieren.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-mohn">
+    <p><strong>Ergibt:</strong> 26 cm · <strong>Backen:</strong> 175 °C O/U · 45–50 Min</p>
+    <h4>Mürbeteig</h4>
+    <ul><li>250 g Mehl</li><li>125 g Butter</li><li>80 g Zucker</li><li>1 Ei</li><li>Prise Salz</li></ul>
+    <h4>Mohnfüllung</h4>
+    <ul><li>500 ml Milch</li><li>60 g Grieß</li><li>200 g gemahlener Mohn</li><li>80 g Zucker</li><li>60 g Butter</li><li>1 Ei</li><li>Vanille</li></ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Mürbeteig mischen, 30 Min kühlen, Form auslegen und 10 Min blindbacken (170 °C).</li>
+      <li>Milch aufkochen, Grieß einrühren, 2 Min ziehen, Mohn, Zucker, Butter, Vanille, Ei unterziehen.</li>
+      <li>Auf Boden verteilen, backen. Auskühlen lassen.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-schwarzwaelder">
+    <p><strong>Ergibt:</strong> 26 cm · <strong>Backen:</strong> 180 °C O/U · 30–35 Min · <strong>Kühlzeit:</strong> 2 h</p>
+    <h4>Schoko-Biskuit</h4>
+    <ul><li>6 Eier</li><li>180 g Zucker</li><li>120 g Mehl</li><li>40 g Stärke</li><li>40 g Kakao</li><li>60 g flüssige Butter</li></ul>
+    <h4>Füllung & Deko</h4>
+    <ul>
+      <li>700 ml Schlagsahne + 50 g Zucker + 2 Pck Sahnesteif</li>
+      <li>1 Glas Sauerkirschen (abgetropft ~350 g), 2 EL Stärke</li>
+      <li>Kirschwasser-Sirup: 120 ml Wasser + 60 g Zucker + 40 ml Kirschwasser</li>
+      <li>Schokoraspel, Kirschen zur Deko</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Biskuit: Eier mit Zucker 8 Min voluminös schlagen, Trockenzutaten sieben und unterheben, Butter einziehen, backen. Auskühlen, 3 Böden schneiden.</li>
+      <li>Kirschen: 150 ml Kirschsaft mit Stärke aufkochen, Kirschen zugeben, abkühlen.</li>
+      <li>Sahne schlagen. Böden mit Sirup tränken, füllen: Boden – Sahne – Kirschen – Sahne, wiederholen. Außen einstreichen, raspeln & Kirschen dekorieren, kühlen.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-himbeer">
+    <p><strong>Ergibt:</strong> 24 cm · <strong>Kühlzeit:</strong> 2 h · <strong>Backen Boden:</strong> 180 °C · 20 Min</p>
+    <h4>Biskuitboden</h4>
+    <ul><li>4 Eier</li><li>120 g Zucker</li><li>100 g Mehl</li><li>20 g Stärke</li></ul>
+    <h4>Creme & Frucht</h4>
+    <ul><li>500 g Mascarpone</li><li>300 ml Sahne</li><li>80 g Zucker</li><li>1 EL Zitronensaft</li><li>1 TL Vanille</li><li>300 g Himbeeren (frisch/ TK)</li></ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Biskuit backen, abkühlen, einmal waagerecht teilen.</li>
+      <li>Sahne mit 30 g Zucker steif, Mascarpone mit 50 g Zucker, Vanille, Zitrone glattrühren, Sahne unterheben.</li>
+      <li>Schichten: Boden – Creme – Himbeeren – Boden – Creme oben, kühlen.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-ganache">
+    <p><strong>Ergibt:</strong> 24 cm · <strong>Backen Böden:</strong> 175 °C · 30–35 Min</p>
+    <h4>Schokoböden</h4>
+    <ul>
+      <li>4 Eier</li><li>180 g Zucker</li><li>200 g Mehl</li><li>40 g Kakao</li><li>10 g Backpulver</li><li>120 ml Milch</li><li>80 ml Öl</li>
+    </ul>
+    <h4>Ganache</h4>
+    <ul><li>400 g Zartbitterschokolade</li><li>400 g Sahne</li><li>40 g Butter</li></ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Böden backen, auskühlen, halbieren (2–3 Lagen).</li>
+      <li>Sahne aufkochen, über gehackte Schokolade geben, Butter einrühren, 30–45 Min anziehen lassen.</li>
+      <li>Torte mit Ganache füllen und glatt einstreichen.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-blaubeer">
+    <p><strong>Ergibt:</strong> 12 Stück · <strong>Backen:</strong> 190 °C · 20–22 Min</p>
+    <h4>Zutaten</h4>
+    <ul>
+      <li>300 g Mehl</li><li>150 g Zucker</li><li>12 g Backpulver</li><li>2 g Salz</li>
+      <li>2 Eier</li><li>240 ml Milch</li><li>90 ml neutrales Öl</li><li>1 TL Vanille</li>
+      <li>200 g Blaubeeren</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol><li>Trockene & flüssige Zutaten separat mischen, dann kurz zusammenrühren.</li><li>Beeren unterheben, sofort abfüllen.</li><li>Backen, 5 Min ruhen, stürzen.</li></ol>
+  </template>
+
+  <template id="tpl-schokomuffin">
+    <p><strong>Ergibt:</strong> 12 Stück · <strong>Backen:</strong> 185 °C · 20–22 Min</p>
+    <h4>Zutaten</h4>
+    <ul>
+      <li>240 g Mehl</li><li>40 g Kakao</li><li>160 g Zucker</li><li>10 g Backpulver</li><li>3 g Natron</li><li>2 g Salz</li>
+      <li>2 Eier</li><li>220 ml Milch</li><li>90 ml Öl</li><li>120 g Schokodrops</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol><li>Wie bei Blaubeer: kurz rühren, Drops unterheben.</li><li>Backen bis Stäbchenprobe sauber.</li></ol>
+  </template>
+
+  <template id="tpl-banane-walnuss">
+    <p><strong>Ergibt:</strong> 12 Stück · <strong>Backen:</strong> 180 °C · 22–24 Min</p>
+    <h4>Zutaten</h4>
+    <ul>
+      <li>3 reife Bananen (~300 g, zerdrückt)</li><li>250 g Mehl</li><li>120 g Zucker</li>
+      <li>2 Eier</li><li>90 ml Öl</li><li>10 g Backpulver</li><li>3 g Natron</li><li>8 g Salz</li>
+      <li>100 g Walnüsse (gehackt)</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol><li>Nass + Trocken getrennt mischen, dann kurz zusammen, Nüsse unterheben.</li><li>Backen, 10 Min ruhen.</li></ol>
+  </template>
+
+  <template id="tpl-sauerteig">
+    <p><strong>Ergibt:</strong> 2 Laibe à ~750 g · <strong>Hydration:</strong> 75 % · <strong>Backen:</strong> 250→210 °C · 45 Min</p>
+    <h4>Teig (Bäckerprozente)</h4>
+    <ul>
+      <li>700 g Weizenmehl T550 (70 %)</li>
+      <li>300 g Roggenmehl T1150 (30 %)</li>
+      <li>750 g Wasser (75 %)</li>
+      <li>20 g Salz (2 %)</li>
+      <li>200 g aktives Anstellgut/Levain (20 %)</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Autolyse: Mehle + 650 g Wasser 30 Min.</li>
+      <li>Levain + restl. Wasser + Salz einarbeiten. 3 h Stockgare bei 24 °C, alle 30 Min falten.</li>
+      <li>Wirken, 12–16 h kalt im Gärkörbchen (4 °C).</li>
+      <li>Backen im vorgeheizten Topf/Stein: 250 °C 20 Min mit Dampf, dann 210 °C 25 Min trocken.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-mehrkorn">
+    <p><strong>Ergibt:</strong> 2 Kastenbrote · <strong>Backen:</strong> 200 °C · 55–60 Min</p>
+    <h4>Quellstück (1 h)</h4>
+    <ul><li>150 g Saatenmischung (Sonnenblumen, Leinsamen, Sesam)</li><li>300 g Wasser</li><li>10 g Salz</li></ul>
+    <h4>Hauptteig</h4>
+    <ul><li>700 g Weizenmehl 1050</li><li>450 g Wasser</li><li>20 g Hefe</li><li>20 g Öl</li><li>Quellstück</li></ul>
+    <h4>Schritte</h4>
+    <ol><li>Teig homogen kneten (8–10 Min), 45 Min Gare.</li><li>Teig in 2 Kastenformen, 30 Min Stückgare.</li><li>Backen, ggf. mit Wasser bestreichen.</li></ol>
+  </template>
+
+  <template id="tpl-weizenbroetchen">
+    <p><strong>Ergibt:</strong> 20 Brötchen · <strong>Backen:</strong> 240 °C · 14–16 Min (mit Dampf)</p>
+    <h4>Direktteig</h4>
+    <ul>
+      <li>1000 g Weizenmehl 550</li><li>600 g Wasser (60 %)</li><li>20 g Salz</li><li>20 g frische Hefe</li><li>10 g Backmalz</li><li>20 g weiche Butter</li><li>10 g Zucker</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>10 Min kneten (glatt), 60 Min Teigruhe.</li>
+      <li>Teilen à ~80 g, rund-/längs wirken, 30–40 Min Stückgare mit Schluss unten.</li>
+      <li>Einschneiden, kräftig schwaden, backen.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-butterplaetzchen">
+    <p><strong>Ergibt:</strong> ~2 Bleche · <strong>Backen:</strong> 180 °C · 10–12 Min</p>
+    <h4>Mürbeteig 3–2–1</h4>
+    <ul><li>300 g Mehl</li><li>200 g kalte Butter</li><li>100 g Zucker</li><li>1 Ei</li><li>Prise Salz, Vanille</li></ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Rasch kneten, 1 h kühlen.</li>
+      <li>3–4 mm ausrollen, ausstechen.</li>
+      <li>Backen bis Rand zart gold.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-cookies">
+    <p><strong>Ergibt:</strong> ~24 Stück · <strong>Backen:</strong> 175 °C · 12–14 Min</p>
+    <h4>Zutaten</h4>
+    <ul>
+      <li>150 g weiche Butter</li><li>120 g brauner Zucker</li><li>1 Ei</li>
+      <li>120 g Mehl</li><li>200 g zarte Haferflocken</li>
+      <li>120 g Cranberries (getr.)</li><li>5 g Backpulver</li><li>2 g Salz</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol><li>Butter+Zucker cremig, Ei einrühren.</li><li>Trockene Zutaten unterheben, Kugeln setzen.</li><li>Backen, auf Blech auskühlen.</li></ol>
+  </template>
+
+  <template id="tpl-zimtschnecken">
+    <p><strong>Ergibt:</strong> 12 Stück · <strong>Backen:</strong> 190 °C · 18–20 Min</p>
+    <h4>Teig</h4>
+    <ul>
+      <li>500 g Mehl</li><li>250 g Milch (lauwarm)</li><li>20 g Hefe</li>
+      <li>80 g Zucker</li><li>80 g weiche Butter</li><li>1 Ei</li><li>8 g Salz</li>
+    </ul>
+    <h4>Füllung & Guss</h4>
+    <ul><li>60 g weiche Butter</li><li>120 g brauner Zucker</li><li>2 EL Zimt</li><li>Guss: 120 g Puderzucker + 2 EL Milch</li></ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Teig 10 Min kneten, 60 Min gehen lassen.</li>
+      <li>50×30 cm ausrollen, mit Butter bestreichen, Zimt-Zucker aufstreuen, aufrollen, 12 Stück schneiden.</li>
+      <li>30 Min Stückgare, backen, lauwarm glasieren.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-buchweizen">
+    <p><strong>Ergibt:</strong> 1 Kasten · <strong>Backen:</strong> 200 °C · 50–60 Min</p>
+    <h4>Zutaten (glutenfrei)</h4>
+    <ul>
+      <li>500 g Buchweizenmehl</li><li>150 g Reismehl</li><li>550 g warmes Wasser</li>
+      <li>12 g Flohsamenschalen (gemahlen)</li><li>12 g Salz</li><li>7 g Trockenhefe</li><li>20 g Öl</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Flohsamen in Wasser quellen (5 Min), restliche Zutaten einarbeiten (klebriger Teig).</li>
+      <li>45–60 Min gehen lassen, in geölte Kastenform füllen, weitere 20 Min gehen.</li>
+      <li>Backen, 10 Min in Form, dann stürzen und auskühlen.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-vegane-schokotorte">
+    <p><strong>Ergibt:</strong> 24 cm · <strong>Backen:</strong> 175 °C · 30–35 Min</p>
+    <h4>Teig (vegan)</h4>
+    <ul>
+      <li>300 g Mehl</li><li>75 g Kakao</li><li>250 g Zucker</li><li>10 g Backpulver</li><li>7 g Natron</li><li>5 g Salz</li>
+      <li>400 ml Pflanzendrink</li><li>120 ml Öl</li><li>2 EL Apfelessig</li><li>1 TL Vanille</li>
+    </ul>
+    <h4>Frosting (Ganache)</h4>
+    <ul><li>350 g Zartbitterschokolade (vegan)</li><li>400 g Kokoscreme</li></ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Trockene mischen, nasse mischen, kurz zusammenrühren, backen (2 Böden möglich).</li>
+      <li>Kokoscreme erhitzen, über Schokolade, glattrühren, abkühlen. Torte füllen & einstreichen.</li>
+    </ol>
+  </template>
+
+  <template id="tpl-lf-kaesekuchen">
+    <p><strong>Ergibt:</strong> 26 cm · <strong>Backen:</strong> 170 °C · 55–65 Min</p>
+    <h4>Füllung (laktosefrei)</h4>
+    <ul>
+      <li>750 g laktosefreier Frischkäse</li><li>200 g Zucker</li><li>4 Eier</li>
+      <li>200 g laktosefreie Schmand/Sauerrahm</li><li>30 g Maisstärke</li><li>1 TL Vanille</li><li>Abrieb ½ Zitrone</li>
+    </ul>
+    <h4>Schritte</h4>
+    <ol>
+      <li>Auf vorgebackenen Boden gießen (z. B. Keksboden oder Mürbeteig).</li>
+      <li>Backen bis Mitte leicht wackelt. Im Ofen bei geöffneter Tür 10 Min abkühlen, dann vollständig kühlen.</li>
+    </ol>
+  </template>
+
+</main>
+
+<footer class="intra-footer">
+  <div class="container--intra intra-footer__inner small">
+    <span>© <span id="year"></span> Haus der Kruste · Intranet</span>
+    <span><a href="index.html">Start</a></span>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+<script>
+  
+  (function(){
+    const modal = document.getElementById('recipe-modal');
+    const body  = document.getElementById('recipe-body');
+    const title = document.getElementById('recipe-title');
+    const closeBtn = modal.querySelector('.modal__close');
+
+    function openFromTemplate(tplId, heading){
+      const tpl = document.getElementById(tplId);
+      if(!tpl){ return; }
+      title.textContent = heading || 'Rezept';
+      body.innerHTML = '';
+      body.appendChild(tpl.content.cloneNode(true));
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      closeBtn.focus();
+    }
+    function close(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      body.innerHTML = '';
+    }
+
+    document.addEventListener('click', (e)=>{
+      const trigger = e.target.closest('.js-open-recipe');
+      if(trigger){
+        e.preventDefault();
+        openFromTemplate(trigger.dataset.tpl, trigger.closest('.recipe-card')?.querySelector('h4')?.textContent);
+      }
+      if(e.target === modal){ close(); }
+    });
+    closeBtn.addEventListener('click', close);
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('open')) close(); });
+  })();
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
